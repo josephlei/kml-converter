@@ -17,14 +17,14 @@ from time import gmtime, strftime
 
 def htmlstr2rowheaderstr(htmlstring):
     from bs4 import BeautifulSoup  # @UnresolvedImport
-    soup = BeautifulSoup(htmlstring)
-    delm ='"'
-    key = ''
-    i =0
+    soup = BeautifulSoup(htmlstring)    #MAKE THE SOUP OBJECT
+    delm ='"'   #JJL: CREATE A DLM VAR, VALUE = DOUBLE QUOTATION MARK
+    key = ''    #JJL: CREATE A VAR NAMED KEY, INIT AS STR
+    i =0        #JJL: CREATE COUNTER VAR NAMED I, SET TO ZERO
     for tables in soup.find_all('table'):
         i +=1
-        if i > 1000 : break
-        rowstr = '';
+        if i > 1000 : break     #JJL: JUST IN CASE, IF >1000 TABLES, STOP.. SOMETHING MAY BE WRONG
+        rowstr = '';            #JJL: CREATE ROWSTR VAR, INIT AS EMPTY STRING
         # if first row has data, then process this table 
         for trow in tables.find_all('tr'): # get each table row
             tds = trow.find_all('td')
@@ -38,8 +38,8 @@ def htmlstr2rowheaderstr(htmlstring):
             else : break  
         # last key val pair 
     # last html table
-    rowstr = rowstr.rstrip(',')
-    return rowstr
+    rowstr = rowstr.rstrip(',') #JJL: REMOVE THE LAST COMMA SINCE IT IS A ONE OFF
+    return rowstr               #JJL: RETURN THE RESULTING STRING OF HEADERS
 
 def htmlstr2rowdatastr(htmlstring):
     from bs4 import BeautifulSoup  # @UnresolvedImport
